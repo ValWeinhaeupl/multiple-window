@@ -14,7 +14,9 @@ ifdef::backend-html5[]
 // print the toc here (not at the default position)
 //toc::[]
 
-== Header 1
+== Overview
+    In unserer Presentation wird das Thema Popup Windows und Dialog Fenster behandelt.
+    Wir erklären Ihnen das Grundwissen zum Thema und wie sie es im Code implementieren mit einem praktischem Beispiel. 6
 
     test
 === Header 2
