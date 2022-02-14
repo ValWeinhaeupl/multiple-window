@@ -24,6 +24,7 @@ ifdef::backend-html5[]
 * Content in neu angelegte Scene einfügen
 * stage.show() um neues Fenster zu zeigen
 
+
 == Code Example
 
 [source, java]
@@ -70,3 +71,15 @@ ifdef::backend-html5[]
     }
 ----
 
+==  Modality
+----
+Möglichkeit Zugriff auf Hauptfenster zu verhindern, während zweites aktiv  ist.
+----
+[source, java]
+----
+secondWindow.initowner(stage);
+secondWindow.initModality(Modality.APPLICATION_MODAL);
+
+//eigene Funktion, die Zugriff auf Parent verhindert, während secondWindow aktiv ist
+secondWindow.showAndWait();
+----
