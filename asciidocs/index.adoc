@@ -24,49 +24,64 @@ ifdef::backend-html5[]
 * Content in neu angelegte Scene einfügen
 * stage.show() um neues Fenster zu zeigen
 
+== Dialogs
+* Information Dialog
+* Warning Dialog
+* Error Dialog
+* Exception Dialog
+* Confirmation Dialog
+* Text Input Dialog
+* Choice Dialog
+* Custom Login Dialog
+* https://code.makery.ch/blog/javafx-dialogs-official/
+
+
 == Code Example
 
 [source, java]
 ----
-@Override
-    public void start(final Stage primaryStage) {
+public class HelloApplication extends Application {
+    @Override
+    public void start(final Stage stage) throws IOException {
 
-        Button button = new Button();
-        button.setText("Open a New Window");
+        Button btn = new Button("click");
+        StackPane root = new StackPane();
+        root.getChildren().addAll(btn);
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
-
+        btn.setOnAction(new EventHandler<ActionEvent>() {<.>
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent actionEvent) {
+                TextField username = new TextField();
+                Button commit = new Button("commit");
+                VBox secondRoot = new VBox();
+                secondRoot.getChildren().addAll(username, commit);
 
-                Label secondLabel = new Label("I'm a Label on new Window");
+                Stage secondStage = new Stage();
 
-                StackPane secondaryLayout = new StackPane();
-                secondaryLayout.getChildren().add(secondLabel);
+                Scene secondScene = new Scene(secondRoot, 320, 240);
+                secondStage.setTitle("second-window");
+                secondStage.setScene(secondScene);
 
-                Scene secondScene = new Scene(secondaryLayout, 230, 100);
 
-                // New window (Stage)
-                Stage newWindow = new Stage();
-                newWindow.setTitle("Second Stage");
-                newWindow.setScene(secondScene);
+                commit.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        System.out.println("username: " + username.getText());
+                        secondStage.close();
+                    }
+                });
 
-                // Set position of second window, related to primary window.
-                newWindow.setX(primaryStage.getX() + 200);
-                newWindow.setY(primaryStage.getY() + 100);
-
-                newWindow.show();
+                secondStage.initOwner(stage);<.>
+                secondStage.initModality(Modality.APPLICATION_MODAL);
+                secondStage.showAndWait();
             }
         });
 
-        StackPane root = new StackPane();
-        root.getChildren().add(button);
-
-        Scene scene = new Scene(root, 450, 250);
-
-        primaryStage.setTitle("JavaFX Open a new Window (o7planning.org)");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Scene scene = new Scene(root, 320, 240);
+        stage.setTitle("first-window");
+        stage.setScene(scene);
+        stage.show();
     }
 ----
-
+<.> Onclick zum öffnen des zweiten Fensters
+<.> Zum sperren von dem ersten Fenster
