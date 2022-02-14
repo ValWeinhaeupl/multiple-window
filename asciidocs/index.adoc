@@ -19,12 +19,12 @@ ifdef::backend-html5[]
     Wir erklären Ihnen das Grundwissen zum Thema und wie sie es im Code implementieren mit einem praktischem Beispiel. 6
 
 
-=== Praxis
+== Praxis
 * Neue Stage und Scene anlegen
 * Content in neu angelegte Scene einfügen
 * stage.show() um neues Fenster zu zeigen
 
-=== Code Example
+== Code Example
 
 [source, java]
 ----
