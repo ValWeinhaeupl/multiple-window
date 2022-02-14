@@ -1,6 +1,6 @@
-= My Project
-firstname lastname
-1.0.0, yyyy-mm-dd: Some notes
+= Multiple Windows/Dialogs
+Seabstian Hager, Valentin Weinhäuple
+1.0.0, 2022-02-07: Some notes
 ifndef::imagesdir[:imagesdir: images]
 //:toc-placement!:  // prevents the generation of the doc at this position, so it can be printed afterwards
 :sourcedir: ../src/main/java
@@ -14,8 +14,57 @@ ifdef::backend-html5[]
 // print the toc here (not at the default position)
 //toc::[]
 
-== Header 1
-    187
+== Overview
+    In unserer Presentation wird das Thema Popup Windows und Dialog Fenster behandelt.
+    Wir erklären Ihnen das Grundwissen zum Thema und wie sie es im Code implementieren mit einem praktischem Beispiel. 6
 
-=== Header 2
+
+=== Windows
+
+
+=== Code Example
+
+[source, java]
+----
+@Override
+    public void start(final Stage primaryStage) {
+
+        Button button = new Button();
+        button.setText("Open a New Window");
+
+        button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+
+                Label secondLabel = new Label("I'm a Label on new Window");
+
+                StackPane secondaryLayout = new StackPane();
+                secondaryLayout.getChildren().add(secondLabel);
+
+                Scene secondScene = new Scene(secondaryLayout, 230, 100);
+
+                // New window (Stage)
+                Stage newWindow = new Stage();
+                newWindow.setTitle("Second Stage");
+                newWindow.setScene(secondScene);
+
+                // Set position of second window, related to primary window.
+                newWindow.setX(primaryStage.getX() + 200);
+                newWindow.setY(primaryStage.getY() + 100);
+
+                newWindow.show();
+            }
+        });
+
+        StackPane root = new StackPane();
+        root.getChildren().add(button);
+
+        Scene scene = new Scene(root, 450, 250);
+
+        primaryStage.setTitle("JavaFX Open a new Window (o7planning.org)");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+----
 
