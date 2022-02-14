@@ -24,6 +24,7 @@ ifdef::backend-html5[]
 * Content in neu angelegte Scene einfügen
 * stage.show() um neues Fenster zu zeigen
 
+
 == Dialogs
 * Information Dialog
 * Warning Dialog
@@ -34,6 +35,7 @@ ifdef::backend-html5[]
 * Choice Dialog
 * Custom Login Dialog
 * https://code.makery.ch/blog/javafx-dialogs-official/
+
 
 
 == Code Example
@@ -85,3 +87,17 @@ public class HelloApplication extends Application {
 ----
 <.> Onclick zum öffnen des zweiten Fensters
 <.> Zum sperren von dem ersten Fenster
+
+
+== Modality
+----
+Möglichkeit Zugriff auf Hauptfenster zu verhindern, während zweites aktiv  ist.
+----
+[source, java]
+----
+secondWindow.initowner(stage);
+secondWindow.initModality(Modality.APPLICATION_MODAL);
+
+//eigene Funktion, die Zugriff auf Parent verhindert, während secondWindow aktiv ist
+secondWindow.showAndWait();
+----
